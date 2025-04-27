@@ -11,3 +11,54 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  margin-bottom: 50px;
+  border-bottom: 3px solid black;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+h2 {
+  text-align: center;
+  margin: 10px;
+}
+input {
+  padding: 6px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+button {
+  padding: 6px 15px;
+  margin: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+.container {
+  display: flex;
+  justify-content: center;
+}
+.but {
+  display: flex;
+  justify-content: center;
+}
+
+.details {
+  text-align: center;
+}
+
+.det {
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 10px;
+}
