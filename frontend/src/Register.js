@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +27,7 @@ const Register = () => {
       return;
     }
 
-    fetch("http://localhost:4000/register", {
+    fetch(`${baseUrl}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -2,6 +2,8 @@ import { useState } from "react";
 import Userpage from "./Userpage";
 
 const Login = () => {
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +14,7 @@ const Login = () => {
   const handleClick = () => {
     console.log(email, password);
 
-    fetch("http://localhost:4000/login", {
+    fetch(`${baseUrl}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

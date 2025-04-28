@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
 const Userpage = ({ adminM, username, email }) => {
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
+
   const [users, setUsers] = useState([]);
   const admin = adminM ? adminM : false;
   console.log(admin);
   useEffect(() => {
     if (admin) {
-      fetch("http://localhost:4000/admin")
+      fetch(`${baseUrl}/admin`)
         .then((res) => {
           if (!res.ok) {
             return res.json().then((data) => {
