@@ -6,6 +6,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [logged, setLogged] = useState(false);
+  const [err, setErr] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   const handleClick = () => {
     console.log(email, password);
@@ -20,15 +22,25 @@ const Login = () => {
       .then((res) => {
         if (!res.ok) {
           return res.json().then((data) => {
-            throw new Error(data.error);
+            throw new Error(
+              data.message || "An error occurred. Please try again."
+            );
           });
         }
-        return res.json();
+        if (res.ok) {
+          return res.json();
+        }
       })
       .then((data) => {
+        setErr("");
+        setAdmin(data.admin);
         setLogged(true);
         setUsername(data.username);
         console.log(data);
+      })
+      .catch((err) => {
+        setErr(err.message);
+        console.error(err);
       });
   };
 
@@ -61,8 +73,8 @@ const Login = () => {
           </div>
         </>
       )}
-
-      {logged && <Userpage username={username} email={email} />}
+      {err && <div className="error">An error occured: {err}</div>}
+      {logged && <Userpage adminM={admin} username={username} email={email} />}
     </div>
   );
 };

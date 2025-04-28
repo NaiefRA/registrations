@@ -4,6 +4,7 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [err, setErr] = useState("");
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -32,11 +33,24 @@ const Register = () => {
       body: JSON.stringify({ username, email, password }),
     })
       .then((res) => {
+        if (!res.ok) {
+          return res.json().then((data) => {
+            throw new Error(
+              data.message || "An error occurred. Please try again."
+            );
+          });
+        }
         return res.json();
       })
       .then((data) => {
+        setErr("");
         console.log(data);
+        alert("User registered successfully");
         navigate("/login");
+      })
+      .catch((Err) => {
+        setErr(Err.message);
+        console.error(Err);
       });
   };
 
@@ -75,6 +89,7 @@ const Register = () => {
       <div className="but">
         <button onClick={handleClick}> Register Account </button>
       </div>
+      {err && <div className="error">An error occured: {err}</div>}
     </div>
   );
 };

@@ -4,7 +4,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
 router.post("/register", async (req, res) => {
-  const { password, username, email } = req.body;
+  const { password, username, email, admin } = req.body;
 
   if (!username || !email || !password) {
     return res.status(400).json({ message: "Input all values" });
@@ -17,6 +17,7 @@ router.post("/register", async (req, res) => {
       username,
       email,
       password: hashedPassword,
+      admin: admin || false,
     });
 
     await newUser.save();
@@ -48,10 +49,24 @@ router.post("/login", async (req, res) => {
     if (correctPassword) {
       return res
         .status(200)
-        .json({ username: user.username, email: user.email });
+        .json({
+          username: user.username,
+          email: user.email,
+          admin: user.admin,
+        });
     }
   } catch (err) {
     res.status(500).json({ message: "Error" });
+  }
+});
+
+router.get("/admin", async (req, res) => {
+  console.log("got req");
+  try {
+    const userList = await User.find({});
+    res.status(200).json(userList);
+  } catch (err) {
+    res.status(400).json({ message: "Error in fetching users" });
   }
 });
 
