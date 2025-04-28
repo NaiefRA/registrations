@@ -27,7 +27,7 @@ const Register = () => {
       return;
     }
 
-    fetch(`${baseUrl}/register`, {
+    fetch(`http://localhost:4000/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

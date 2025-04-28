@@ -5,10 +5,9 @@ const Userpage = ({ adminM, username, email }) => {
 
   const [users, setUsers] = useState([]);
   const admin = adminM ? adminM : false;
-  console.log(admin);
   useEffect(() => {
     if (admin) {
-      fetch(`${baseUrl}/admin`)
+      fetch(`http://localhost:4000/admin`)
         .then((res) => {
           if (!res.ok) {
             return res.json().then((data) => {
@@ -21,7 +20,6 @@ const Userpage = ({ adminM, username, email }) => {
         })
         .then((data) => {
           setUsers(data);
-          console.log(data);
         });
     }
   }, []);
@@ -36,7 +34,7 @@ const Userpage = ({ adminM, username, email }) => {
       )}
 
       {admin && users && (
-        <div>
+        <div className="user-list">
           {users.map((user, i) => {
             return (
               <div className="user-container" key={i}>

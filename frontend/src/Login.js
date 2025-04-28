@@ -12,9 +12,7 @@ const Login = () => {
   const [admin, setAdmin] = useState(false);
 
   const handleClick = () => {
-    console.log(email, password);
-
-    fetch(`${baseUrl}/login`, {
+    fetch(`http://localhost:4000/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
